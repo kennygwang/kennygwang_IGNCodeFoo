@@ -1,4 +1,6 @@
 var calcPlates = function() {
+    document.getElementById("input").focus();
+    document.getElementById("input").select();
     var population = document.getElementById("input").value;
     var nDigits = 1;            // # of digits
     var nLetters = 1;           // # of letters
@@ -38,19 +40,18 @@ var calcPlates = function() {
     }
     
     while(Math.pow(10,x)*Math.pow(26,y) < population) {
-        if(Math.pow(10,x)*Math.pow(26,y) === population) {break;}
+        if(Math.pow(10,x)*Math.pow(26,y) === population) {break;}       // If you ever
         x--;
         y++;
         if(x < 0) break;                    // for the case of pop: 27
     }
     
     while(Math.pow(26,a)*Math.pow(10,b) > population) {
-        if (Math.pow(26,a)*Math.pow(10,b) === population) {break;}
         a--;
         b++;
         if(a < 0) break;                    // that's as low as your number will go. case of pop: 27, for example
     }
-    if(Math.pow(26,a) != population) {
+    if(Math.pow(26,a)*Math.pow(10,b) != population) {   // If your answer is good, then keep it that way.
         a++;
         b--;
     }
@@ -81,6 +82,4 @@ var calcPlates = function() {
     $("#total").text(totalPlates);
     $("#excess").text(totalPlates - population);
     return; 
-    
-    //$("#population").append("population");
 };
