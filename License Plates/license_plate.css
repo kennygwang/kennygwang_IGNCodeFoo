@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    font-family: "arial";
+}
+#wrap {
+    margin: 0px auto;
+    width: 200px;
+    padding-top: 200px;
+}
+.line-div {
+    display: block;
+    clear: both;
+    padding-bottom: 10px;
+}
+.label {
+    float: left;
+}
+.output {
+    float: right;
+}
+#submit {
+    float: right;
+}

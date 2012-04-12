@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>License Plate</title>
+        <link type="text/css" rel="stylesheet" href="license_plate.css" />
+        <script type="text/javascript" src="license_plate3.js"></script>            <!-- remember to change this back to license_plate.js-->
+        <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="wrap">                             <!--start wrap-->
+            
+            <div class="line-div">
+                <input type="text" id="input"/>
+                <input type="submit" id="submit" onclick= "calcPlates();"/>
+            </div>
+            
+            <div class="line-div">
+                <p class="label">Population:</p>
+                <p id="population" class="output"></p>
+            </div>
+            
+            <div class="line-div">
+                <p class="label">Pattern:</p>
+                <p id="pattern" class="output"></p>
+            </div>
+            
+            <div class="line-div">
+                <p class="label">Total Plates:</p>
+                <p id="total" class="output"></p>
+            </div>
+            
+            <div class="line-div">
+                <p class="label">Excess Plates:</p>
+                <p id="excess" class="output"></p>
+            </div>
+            
+        </div>                                      <!--end wrap-->
+    </body>
+</html>
