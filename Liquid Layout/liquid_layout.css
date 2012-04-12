@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.navbar {
+    border: 1px solid black;
+    background: yellow;
+    height: 40px;
+    width: 100%;
+    }
+    .navbar li {
+        display: inline;
+    }
+
+.page-wrapper {
+    border: 1px solid black;
+    background: teal;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    border: 1px solid blue;
+    margin: 0px auto;
+    height: 100%;
+    max-width: 960px;
+    min-width: 780px;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    margin: 0px auto;
+    border: 1px dashed orange;
+    background: white;
+    padding: 5px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.left-sidebar {
+    border: 1px solid orange;
+    float: left;
+    background: red;
+    width: 150px;
+    height: 100%;
+}
+.main-content {
+    border: 1px solid green;
+    height: 100%;
+    overflow: auto;
+    padding-left: 7px;
+}
+
+#footer {
+    text-align: center;
+    border: 1px solid gold;
+    background: green;
+    margin-top: -40px;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    clear: both;
+}
+/* To Do:
+   1) Finish making sidebar the same height as the main content.
+   2) Make the footer display under the content and sidebar. */ 
