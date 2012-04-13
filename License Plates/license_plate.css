@@ -14,7 +14,7 @@ html, body {
 .line-div {
     display: block;
     clear: both;
-    margin-bottom: 1em;
+    margin-bottom: 15px;
 }
 .label {
     float: left;
@@ -25,3 +25,4 @@ html, body {
 #submit {
     float: right;
 }
+#text-field-label {font-size: 80%}
