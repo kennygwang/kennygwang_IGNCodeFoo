@@ -8,13 +8,13 @@ html, body {
 }
 #wrap {
     margin: 0px auto;
-    width: 200px;
+    width: 250px;
     padding-top: 200px;
 }
 .line-div {
     display: block;
     clear: both;
-    padding-bottom: 10px;
+    margin-bottom: 1em;
 }
 .label {
     float: left;

@@ -6,6 +6,11 @@ var calcPlates = function() {
     var nLetters = 1;           // # of letters
     var totalPlates;
     
+    if(!$.isNumeric(population)) {
+        alert("Your population must be numeric. Nice try.")
+        return;
+    }
+    
     if(population <= 10) {                      // the "base cases" need no calculation
         $("#population").text(population);
         $("#pattern").text("1 number");
