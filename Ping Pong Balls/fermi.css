@@ -1,0 +1,16 @@
+
+html, body {
+    height: 100%;
+    font-family: "arial";
+    vertical-align: middle;
+}
+#wrap {
+    margin: 0px auto;
+    padding-top: 1em;
+    padding-bottom: 100px;
+    width: 800px;
+}
+ul {
+    list-style: none;
+    width: 600px;
+}

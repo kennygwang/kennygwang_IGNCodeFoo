@@ -3,9 +3,8 @@ var calcPlates = function() {
     document.getElementById("input").focus();       // highlight the text field after hitting the submit button or pressing enter
     document.getElementById("input").select();
     
-    var population = document.getElementById("input").value;       // get the population value from the text field
-    
-    if(!$.isNumeric(population) || population == 0) {              // verify that the user input a positive numeric value for population. also, why doesn't === work?
+    var population = Number(document.getElementById("input").value);       // get the population value from the text field
+    if(!$.isNumeric(population) || population === 0) {              // verify that the user input a positive numeric value for population. also, why doesn't === work?
         alert("Your population must be a positive number. Nice try, though.")
         return;
     }
@@ -27,10 +26,10 @@ var calcPlates = function() {
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
     var x = 1;
     var y = 0;
-    while(Math.pow(10,x) < population) {      // find greatest power of 10 less than target. this creates the "upper bound length" since you need more powers of 10 than powers of 26 to reach the target. The solution pattern will have a length of either the lower bound or upper bound, or the special case of powers of 10
-        x++;
+    while(Math.pow(10,x) < population) {       //Find greatest power of 10 less than target. this creates the "upper bound length" since you need more powers of 10 than powers of 26 to reach the target.
+        x++;                                   //The solution pattern will have a length of either the lower bound or upper bound, or the special case of powers of 10
     }
-    if(Math.pow(10,x) != population) x--;     // above loop found least power of 10 greater than target, minus one is greatest power smaller than the target (unless it found exactly the number)
+    if(Math.pow(10,x) != population) x--;      // above loop found least power of 10 greater than target, minus one is greatest power smaller than the target (unless it found exactly the number)
     
     var pow10 = 0;
     while(Math.pow(10,pow10) < population){    // find least power of 10 greater than target. the powers of 10 don't necessarily help predict the length of the solution patern, so I call them "special cases"
@@ -39,22 +38,21 @@ var calcPlates = function() {
     
     var a = 1;
     var b = 0;
-    while(Math.pow(26,a) < population) {     // find smallest power of 26 greater than target. this creates the "lower bound length" since you need less powers of 26 than powers of 10 to reach the target
+    while(Math.pow(26,a) < population) {       // find smallest power of 26 greater than target. this creates the "lower bound length" since you need less powers of 26 than powers of 10 to reach the target
         a++;
     }
     
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-    
     while(Math.pow(10,x)*Math.pow(26,y) < population) {                 // Swap digits for letters until greater than the target
         if(Math.pow(10,x)*Math.pow(26,y) === population) {break;}       // If you ever hit the target population exactly, stop what you're doing and move on
         x--;
         y++;
         if(x < 0) break;                                                // your exponents should never be negative, but e.g. for the case of population of 27, this occurs
     }
-    
+
     while(Math.pow(26,a)*Math.pow(10,b) > population) {                 // Swap letters for digits until less than the target
-        if (Math.pow(26,a)*Math.pow(10,b) === population) break;        // If you ever hit the target population exactly, stop what you're doing and move on (i don't think that ever happens in this loop, but I included this to be safe)
-        a--;
+        if (Math.pow(26,a)*Math.pow(10,b) === population) break;        // If you ever hit the target population exactly, stop what you're doing and move on
+        a--;                                                            // (I don't think that ever happens in this loop, but I included this to be safe)
         b++;
         if(a < 0) break;                                                // your exponents should never be negative, but e.g. for the case of population of 27, this occurs
     }

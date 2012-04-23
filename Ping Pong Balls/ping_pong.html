@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>1. Ping Pong Balls</title>
+        <link type="text/css" rel="stylesheet" href="fermi.css" />
+    </head>
+    
+    <body>
+        <div id="wrap">                             <!--start wrap-->
+            <div id="question">
+                <h1>How many ping pong balls would it take
+                to fill an average-sized school bus? Describe each step in your
+                thought process.</h1>
+            </div>
+            <ul id="steps">
+                <li>
+                    <h2>Step #1: Identify Assumptions.</h2>
+                    <p>The purpose of doing a Fermi question is to demonstrate your approximation skills
+                    and the importance of clearly identifying your assumptions.
+                    Here, we will be making assumptions about the interior volume of the bus
+                    and how the ping pong balls will fit inside it.
+                    With the proper assumptions, our solution will be close to correct since our over- and
+                    under-estimates will roughly cancel out. It will be acceptable to be
+                    within one order of magnitude from the "true answer."</p>
+                    <p>The biggest assumption I will be making is that we can consider the interior of
+                    the bus to be a rectangular prism. This ignores several aspects of the bus's true geometry,
+                    but allow me to explain how the over- and under- estimations cancel out.</p>
+                    <p>First, assume we can ignore the details of the front of the bus, e.g. the driver's seat,
+                    the space around the gas and brake pedals, the steering wheel, dashboard and equipment,
+                    and the stairs. Ignoring things like the driver's seat or dashboard would effectively
+                    "add space" by pretending that they don't exist, but ignoring the gas/break pedal space
+                    and stairs would also then "remove space." Thus, we can think of the front of the bus in
+                    a simplified manner.</p>
+                    <p>Next, ignore the curvature of the bus roof. If we take height of the highest point of
+                    the roof's arc to be the height of our rectangular prism, then we are overestimating the
+                    volume of the bus. However, by ignoring the volume taken up by the bus seat support bars
+                    and also the "humps" in the bus cabin that make room for the bus wheels, we roughly cancel
+                    out our overestimate.</p>
+                    <p>Essentially, all we need to know is the height, length and width of our bus interior to
+                    find the approximate volume.</p>
+                </li>
+                
+                <li>
+                    <h2>Step #2: Determine the dimensions of an average-sized school bus cabin.</h2>
+                    <p>The average Type C school bus interior manufactured by Blue Bird Corporation is 90.75
+                    inches wide, (since there was a range of lengths, I took the mean value) 394 inches long,
+                    and 74 inches high.</p>
+                    <p><strong>Volume: 90.75 x 394 x 74 = 2645907 cubic inches, or 43.36 cubic meters</strong></p>
+                    <p>Source: <a href="http://www.blue-bird.com/uploadedFiles/Blue-Bird/Products/School/Vision/SB-VIS-0710.pdf">
+                    http://www.blue-bird.com/uploadedFiles/Blue-Bird/Products/School/Vision/SB-VIS-0710.pdf</a></p>
+                </li>
+                
+                <li>
+                    <h2>Step #3: Determine the total volume of bus seats.</h2>
+                    <p>Something that should not be ignored is the space taken up by the bus seats. According
+                    to the spec sheet, Blue Bird Type C buses have passenger capacities of 48 - 77 persons, but
+                    let's assume we can take one of the middle values and say that the typical bus carries at
+                    maximum 66 passengers. Since a maximum of 3 people are allowed per seat, that makes 22 bus
+                    seats.</p>
+                    <p>Finding documentation for the dimensions of school bus seats is difficult, but by
+                    combining various sources we can come up with a reasonable estimate. Let's assume that seat
+                    backs are 39 inches wide, 26.5 inches high, and 4.5 inches deep and that seat bottoms are 39
+                    inches wide, 15 inches high, and 4.5 inches deep.</p>
+                    <p><strong>Total Volume: 22 x ( 39 x 26.5 x 4.5 + 39 x 15 x 4.5 ) =
+                    160231.5 cubic inches, or 2.62572 cubic meters</strong></p>
+                    <p>In order to find the total volume that ping pong balls may occupy on a bus, we subtract
+                    the seat volume from the cabin volume:</p>
+                    <p><strong>Net Volume: 43.36 - 2.62572 = 40.73428 cubic meters</strong></p>
+                    <p>Source 1: <a href="http://www.apartswarehouse.com/BrowseProducts.aspx?CatID=112">
+                    http://www.apartswarehouse.com/BrowseProducts.aspx?CatID=112</a><br/>
+                    Source 2: <a href="http://heritagemath.wordpress.com/2012/01/14/how-many-golfballs-can-fit-in-a-school-bus/">
+                    http://heritagemath.wordpress.com/2012/01/14/how-many-golfballs-can-fit-in-a-school-bus/</a></p>
+                </li>
+                
+                <li>
+                    <h2>Step #4: Determine the size of a ping pong ball.</h2>
+                    <p>The diameter of a ping pong ball is 40 mm, or 0.04 meters. The volume of a ping pong
+                    ball is thus:</p>
+                    <p><strong>(4/3) * pi * .02^3 =  0.000033510 cubic meters</strong></p>
+                    <p>Source: <a href="http://en.wikipedia.org/wiki/Table_tennis">
+                    http://en.wikipedia.org/wiki/Table_tennis</a></p>
+                </li>
+                
+                <li>
+                    <h2>Step #5: Consider the Close-Packing of Equal Spheres</h2>
+                    <p>Since we are filling a cubic space with spherical objects, we cannot expect that
+                    the entire volume will be filled-in since there will be gaps between adjacent ping pong
+                    balls. In order to maximize the number of balls in a space, we wouldn't stack them in a
+                    grid-like lattice, but rather offset the ping pong balls so that each balls rests upon the
+                    empty space formed by the adjacent balls underneath it. Using the most efficient lattice,
+                    Carl Friedrich Gauss proved that about 74.048 % of a space can be filled in by sphere
+                    packing.</p>
+                    <p>Therefore, the total amount of space our ping pong balls will occupy is:</p>
+                    <p><strong>0.74048 x 40.73428 = 30.16292 cubic meters</strong></p>
+                    <p>Source: <a href="http://en.wikipedia.org/wiki/Close-packing_of_spheres">
+                    http://en.wikipedia.org/wiki/Close-packing_of_spheres</a></p>
+                </li>
+                
+                <li>
+                    <h2>Step #6: Final Calculation</h2>
+                    <p>We found that the total volume that our ping pong balls can fill by the close-packing
+                    of equal spheres in a bus cabin is 30.16292 cubic meters and that a ping pong ball is
+                    0.00026808 cubic meters in volume. <strong>30.16292 / 0.00026808 = 900,108.34052</strong>,
+                    and we can disregard the fraction since we are not interested in fractions of ping
+                    pong balls.</p>
+                    <p><strong>You could fit 900,108 ping pong balls in an average-sized school bus.</strong></p>
+                </li>
+            </ul>
+        </div>                                      <!--end wrap-->
+    </body>
+</html>

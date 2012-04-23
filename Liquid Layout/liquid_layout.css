@@ -4,6 +4,7 @@
 }
 html, body {
     height: 100%;
+    font-family: "arial";
 }
 
 #wrap {
@@ -66,12 +67,9 @@ html, body {
     text-align: center;
     border: 1px solid gold;
     background: green;
-    margin-top: -40px;
     position: relative;
     height: 40px;
+    margin-top: -40px;
     width: 100%;
     clear: both;
 }
-/* To Do:
-   1) Finish making sidebar the same height as the main content.
-   2) Make the footer display under the content and sidebar. */ 

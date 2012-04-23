@@ -5,11 +5,12 @@
 html, body {
     height: 100%;
     font-family: "arial";
+    vertical-align: middle;
 }
 #wrap {
     margin: 0px auto;
+    padding-top: 100px;
     width: 250px;
-    padding-top: 200px;
 }
 .line-div {
     display: block;
@@ -18,6 +19,7 @@ html, body {
 }
 .label {
     float: left;
+    padding-top: 4px;
 }
 .output {
     float: right;
@@ -25,4 +27,4 @@ html, body {
 #submit {
     float: right;
 }
-#text-field-label {font-size: 80%}
+#text-field-label {font-size: 70%}
