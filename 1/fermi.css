@@ -14,3 +14,6 @@ ul {
     list-style: none;
     width: 600px;
 }
+#next {
+    float: right;
+}

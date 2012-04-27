@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+    font-family: "arial";
+    vertical-align: middle;
+}
+#wrap {
+    margin: 0px auto;
+    padding-top: 10px;
+    width: 850px;
+}
+#intro{
+    margin: 0px auto;
+    width: 600px;
+}
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#nav{
+    margin: 0px auto;
+    width: 600px;
+    padding-top: 50px;
+}
+#prev {float: left;}
+#next {float: right;}

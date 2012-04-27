@@ -9,8 +9,13 @@ html, body {
 }
 #wrap {
     margin: 0px auto;
-    padding-top: 100px;
     width: 250px;
+}
+#intro {
+    margin: 0px auto;
+    width: 600px;
+    padding-top: 20px;
+    font-size: 110%
 }
 .line-div {
     display: block;
@@ -24,7 +29,14 @@ html, body {
 .output {
     float: right;
 }
+#text-field-label {font-size: 70%}
 #submit {
     float: right;
 }
-#text-field-label {font-size: 70%}
+#nav{
+    margin: 0px auto;
+    width: 600px;
+    padding-top: 150px;
+}
+#prev {float: left;}
+#next {float: right;}

@@ -10,7 +10,7 @@ function maxArrValIndex(array){
     return maxIndex;
 }
 
-// *****************************************************************************
+// Below are the recursive functions used to assign heuristic values to each possibel move
 function heurDown(board, row, col) {                                                  
     if(row+1 >= numRows || board[row+1][col] != Piece.PlayerOne) return 1;
     return 1 + heurDown(board, row+1, col);
@@ -41,19 +41,19 @@ function heurDownRight(board, row, col) {
 }
 
 function heurValue(board, row, col){
-    hDown = heurDown(board, row, col);
+    hDown = heurDown(board, row, col) + 1;                                      // I added the +1 when I noticed a tendancy of the bot to overlook the player's vertical wins
     hHori = heurLeft(board, row, col) + heurRight(board, row, col);
     hDia1 = heurUpLeft(board, row, col) + heurDownRight(board, row, col);
     hDia2 = heurDownLeft(board, row, col) + heurUpRight(board, row, col);
     
     return Math.max(hDown, hHori, hDia1, hDia2);
 }
-// *****************************************************************************
+// *********************************************************************************************************************
 
-function heuristicMove(board){                            // Is this the only "bot move" function I need to have a defensive AI? Let's find out.
+function heuristicMove(board){                           // This is the function that ultimately moves the Bot's pieces
     var lastRow = 0;
     var hArray = [board[0].length];
-    for(x=0; x < hArray.length; x++){hArray[x] = 0;}     // Initialize the hArray
+    for(x=0; x < hArray.length; x++){hArray[x] = 0;}     // Initialize the heuristicArray
     
     for(i=0; i < numCols; i++){
         lastRow = numRows - 1;
@@ -71,14 +71,14 @@ function heuristicMove(board){                            // Is this the only "b
         hArray[i] = heurValue(board, lastRow, i);         // The heuristic array is completed after the last iteration of the for loop 
     }
     
-    var botMoveCol = maxArrValIndex(hArray);
+    var botMoveCol = maxArrValIndex(hArray);              // The column that the Bot chooses corresponds to the largest heuristic valued move
     lastRow = numRows - 1;
-    while(board[lastRow][botMoveCol] != Piece.Empty){     // Essentially recreating the part of dropPiece() that finds the first empty row
+    while(board[lastRow][botMoveCol] != Piece.Empty){     // This line essentially recreates the part of dropPiece() that finds the first empty row
             lastRow--;
     }
     board[lastRow][botMoveCol] = Piece.PlayerTwo;
     
-    turn = Piece.PlayerOne;
-    lastPieceRow = lastRow;                         // Still need to keep track of the last move, so we can check for winnings
+    turn = Piece.PlayerOne;                               // These three must be updated everytime a piece is dropped
+    lastPieceRow = lastRow;
     lastPieceCol = botMoveCol;
 }

@@ -73,3 +73,10 @@ html, body {
     width: 100%;
     clear: both;
 }
+#nav{
+    max-width: 960px;
+    min-width: 780px;
+    margin: 0px auto;
+}
+#prev {float: left;}
+#next {float: right;}
