@@ -13,11 +13,16 @@ var playerMovedYet;                     // Boolean that keeps track of whether P
 var movingCol = 0;                      // Keeps track of which column the PLayer clicks in
 var lastPieceRow = 0;                   // Two important variables that keep track of which piece was dropped in most recently
 var lastPieceCol = 0;
+var playerWins = 0;                     // Two global variables that track scores
+var botWins = 0;
+
 
 function initializeGame() {             // Important values are initialized
     turn = Piece.PlayerOne;
     gameOver = false;
     playerMovedYet = false;
+    $("#player_score").text(playerWins);        // Initialize or update the scoreboard
+    $("#bot_score").text(botWins);
 }
 
 function initializeBoard() {            // A blank Connect Four Board is created
@@ -168,17 +173,19 @@ function checkGameOver(ctx, board) {        // Checks for game over and doles ou
     if(isGameOver(board)) {
         if(turn == Piece.PlayerOne) {                           // If the game ended when Player was just about to move, that means the Bot won. And vice versa.
             gameOverText = gameOverText.replace("%", "Yellow");
+            botWins++;
             alert("The Bot AI Wins!");
         }
         else if(turn == Piece.PlayerTwo) {
             gameOverText = gameOverText.replace("%", "Red");
+            playerWins++;
             alert("You've Won!");
         }
 
         ctx.fillText(gameOverText, width / 3 - 100, height / 2);
         gameOver = true;
     }
-    else if(boardFull(board) && !gameOver) {                    // Either someone won or the board filled up and it's a tie game
+    else if(boardFull(board)) {                    // Either someone won or the board filled up and it's a tie game
         alert("It's a tie game.");
         ctx.fillText("Game Tied", width / 3 - 100, height / 2);
         gameOver = true;
