@@ -1,4 +1,4 @@
-function maxArrVal(array){
+function maxArrVal(array){              // Some basic and useful array operation functions
     var max=0;
     for(i=0;i < array.length;i++){
         max = Math.max(max, array[i]);
@@ -48,7 +48,7 @@ function heurDownRight(board, row, col, piece) {
 }
 
 function heurValue(board, row, col, piece){
-    hDown = heurDown(board, row, col, piece) + 1;                               // I added the +1 when I noticed a tendancy of the bot to overlook the player's vertical wins
+    hDown = heurDown(board, row, col, piece) + 1;                               // +1 compensates for the lack of double-counting the dropped piece
     hHori = heurLeft(board, row, col, piece) + heurRight(board, row, col, piece);
     hDia1 = heurUpLeft(board, row, col, piece) + heurDownRight(board, row, col, piece);
     hDia2 = heurDownLeft(board, row, col, piece) + heurUpRight(board, row, col, piece);
@@ -59,16 +59,14 @@ function heurValue(board, row, col, piece){
 
 function heuristicMove(board){                           // This is the function that ultimately moves the Bot's pieces
     var lastRow = 0;
-    var hArray = [board[0].length];
-    var botMovedYet = false;
-    
+    var hArray = [board[0].length];    
     for(x=0; x < hArray.length; x++){hArray[x] = 0;}     // Initialize the heuristicArray
         
     for(i=0; i < numCols; i++){
         lastRow = numRows - 1;
-            
-        skipCol = false;
-        while(board[lastRow][i] != Piece.Empty){
+        
+        var skipCol = false;                            // Skip the column if it's full, by leaving it's heuristic value at 0
+        while(board[lastRow][i] != Piece.Empty){        // Just like the dropPiece function, this finds the last empty row in a column
             lastRow--;
             if(lastRow < 0) {
                 skipCol = true;
@@ -77,69 +75,23 @@ function heuristicMove(board){                           // This is the function
         }
         if(skipCol) continue;
             
-        hArray[i] = heurValue(board, lastRow, i, Piece.PlayerTwo);     // The heuristic array is completed after the last iteration of the for loop 
-    }
-    
-    if(maxArrVal(hArray) >= 5){    
-        var botMoveCol = maxArrValIndex(hArray);              // The column that the Bot chooses corresponds to the largest heuristic valued move
-        lastRow = numRows - 1;
-        while(board[lastRow][botMoveCol] != Piece.Empty){     // This line essentially recreates the part of dropPiece() that finds the first empty row
-                lastRow--;
-        }
-        board[lastRow][botMoveCol] = Piece.PlayerTwo;
+        if(heurValue(board, lastRow, i, Piece.PlayerTwo) >= 5) hArray[i] = 10;    // If the bot can win this turn, the column is highest priority
+        else if(heurValue(board, lastRow, i, Piece.PlayerOne) >= 5) hArray[i] = 9; // If the player can win next turn, the column is high priority
+        else if(lastRow-1 >= 0 && heurValue(board, lastRow-1, i, Piece.PlayerOne) >= 5) hArray[i] = 1; // If dropping a piece lets the Player win next turn, the column is low priority
+        else if(lastRow-1 >= 0 && heurValue(board, lastRow-1, i, Piece.PlayerTwo) >= 5) hArray[i] = 2; // If dropping a piece lets the Player block the bot's win next turn, the column is low priority
+        else hArray[i] = heurValue(board, lastRow, i, Piece.PlayerOne);     // The heuristic array is completed after the last iteration of the for loop
             
-        turn = Piece.PlayerOne;                               // These three must be updated everytime a piece is dropped
-        lastPieceRow = lastRow;
-        lastPieceCol = botMoveCol;
-        botMovedYet = true;                                   // The bot found an opportunity to win and successfully moved its piece.
     }
-    
-    if(!botMovedYet){
-        for(x=0; x < hArray.length; x++){hArray[x] = 0;}     // Initialize the heuristicArray so that this time, it calculates the defensive heuristics
         
-        for(i=0; i < numCols; i++){
-            lastRow = numRows - 1;
-            
-            skipCol = false;
-            while(board[lastRow][i] != Piece.Empty){
-                lastRow--;
-                if(lastRow < 0) {
-                    skipCol = true;
-                    break;
-                }
-            }
-            if(skipCol) continue;
-            
-            hArray[i] = heurValue(board, lastRow, i, Piece.PlayerOne);     // The heuristic array is completed after the last iteration of the for loop 
-        }
-        
-        var botMoveCol = maxArrValIndex(hArray);              // The column that the Bot chooses corresponds to the largest heuristic valued move    
-        lastRow = numRows - 1;
-        while(board[lastRow][botMoveCol] != Piece.Empty){     // This line essentially recreates the part of dropPiece() that finds the first empty row
-                lastRow--;
-        }
-        
-        if(lastRow-1 >= 0 && heurValue(board, lastRow-1, botMoveCol, Piece.PlayerOne) >= 5){     // If true, dropping a piece lets the Player win in their next turn
-            hArray[botMoveCol] = 1;                                        // Make that move no longer an option by reducing its h value to 1 (because 1 is still better than a full column)
-            botMoveCol = maxArrValIndex(hArray);                           // Reset botMoveCol to the next best heuristic value
-            lastRow = numRows - 1;
-            while(board[lastRow][botMoveCol] != Piece.Empty){              // For the new column, re-calculate the row that the piece will be dropped in
-                lastRow--;
-            }
-        }
-        if(lastRow-1 >= 0 && heurValue(board, lastRow-1, botMoveCol, Piece.PlayerTwo) >= 5){     // If true, dropping a piece lets the Player block Bot win their next turn
-            hArray[botMoveCol] = 2;                                        // Reduce h value to 2, so that it's still better than letting Player win but still very low
-            botMoveCol = maxArrValIndex(hArray);                           // Reset botMoveCol to the next best heuristic value
-            lastRow = numRows - 1;
-            while(board[lastRow][botMoveCol] != Piece.Empty){              // For the new column, re-calculate the row that the piece will be dropped in
-                lastRow--;
-            }
-        }
-        
-        board[lastRow][botMoveCol] = Piece.PlayerTwo;         // Finally after all the checking and thinking, actually drop the piece
-        
-        turn = Piece.PlayerOne;                               // These three must be updated everytime a piece is dropped
-        lastPieceRow = lastRow;
-        lastPieceCol = botMoveCol;
+    var botMoveCol = maxArrValIndex(hArray);              // The column that the Bot chooses corresponds to the largest heuristic valued move    
+    lastRow = numRows - 1;
+    while(board[lastRow][botMoveCol] != Piece.Empty){     // Again, finding the last empty row
+        lastRow--;
     }
+        
+    board[lastRow][botMoveCol] = Piece.PlayerTwo;         // Finally, bot "drops" a piece
+        
+    turn = Piece.PlayerOne;                               // These three must be updated everytime a piece is dropped
+    lastPieceRow = lastRow;
+    lastPieceCol = botMoveCol;
 }

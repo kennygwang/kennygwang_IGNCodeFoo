@@ -1,6 +1,6 @@
 var numRows = 6;                        // 6 rows x 7 columns Connect Four Board
 var numCols = 7;
-var blockWidth = 65;                    // Each block, or "space" on the board will be as 70px squares on the canvas element
+var blockWidth = 65;                    // Each block, or "space" on the board will be 65px squares on the canvas element
 var blockHeight = 65;
 var width = blockWidth * numCols;       // The overall dimensions of the canvas are calculated
 var height = blockHeight * numRows;
@@ -15,7 +15,6 @@ var lastPieceRow = 0;                   // Two important variables that keep tra
 var lastPieceCol = 0;
 var playerWins = 0;                     // Two global variables that track scores
 var botWins = 0;
-
 
 function initializeGame() {             // Important values are initialized
     turn = Piece.PlayerOne;
@@ -38,6 +37,15 @@ function initializeBoard() {            // A blank Connect Four Board is created
     return board;
 }
 
+function intro(ctx){                    // A little message that prompts the user to click the board to begin, only draws once, on page load
+    ctx.save();
+    ctx.fillStyle = "blue";
+    ctx.font = "60px sans-serif";
+    ctx.fillText("Click a Column", width / 3 - 120, height / 2);
+    ctx.font = "20px sans-serif";
+    ctx.fillText("To begin the game.", width / 3 - 87, height / 2 + 30);
+}
+
 function fillCircle(ctx, x, y, r) {     // Draws circles on the HTML canvas
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2, true);
@@ -50,7 +58,7 @@ function renderBoard(ctx, board) {      // When called, it draws the entire stat
     for(var i = 0; i < numRows; i++) {
         for(var j = 0; j < numCols; j++) {
             ctx.save();
-            ctx.strokeStyle = "blue";                       // Draws the board's grid
+            ctx.strokeStyle = "black";                       // Draws the board's grid
             ctx.strokeRect(j * blockWidth, i * blockHeight,
                            blockWidth, blockHeight);
             ctx.restore();
@@ -89,7 +97,7 @@ function clearBoard(ctx) {                      // Whites out the canvas, so it 
 function dropPiece(board) {                     // Important function that determines how the pieces move
     playerMovedYet = false;                     // In case a column already full is clicked, we keep track of whether the player was successful in dropping a piece
     
-    var lastRow = numRows - 1;                  // Finds the first empty row to place a piece in, like how gravity works IRL (in real life)
+    var lastRow = numRows - 1;                  // Finds the first empty row to place a piece in, like how gravity works IRL
     while(board[lastRow][movingCol] != Piece.Empty) {
         lastRow--;
         if(lastRow < 0) return;
@@ -136,7 +144,7 @@ function checkVerticalWin(board) {                                      // These
     return false;
 }
 function checkHorizontalWin(board) {
-    if(checkLeft(board, lastPieceRow, lastPieceCol) + checkRight(board, lastPieceRow, lastPieceCol) >= 5) return true;      // The value 5 is used because the last moved piece in particular is double-counted
+    if(checkLeft(board, lastPieceRow, lastPieceCol) + checkRight(board, lastPieceRow, lastPieceCol) >= 5) return true;      // The value 5 is used because the last moved piece is double-counted
     return false;
 }
 function checkDiagonalWin(board) {
@@ -154,7 +162,7 @@ function isGameOver(board) {                // If any of the 3 types of wins occ
 function boardFull(board) {                 // Checks of the board is full, meaning tie game
     for(var i = 1; i < numRows; i++) {
         for(var j = 0; j < numCols; j++) {
-            if(board[i][j] == Piece.Empty) {
+            if(board[i][j] === Piece.Empty) {
                 return false;
             }
         }
@@ -167,7 +175,7 @@ function checkGameOver(ctx, board) {        // Checks for game over and doles ou
     var gameOverText = "% wins!";
 
     ctx.save();
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "blue";
     ctx.font = "60px sans-serif";
 
     if(isGameOver(board)) {
@@ -183,11 +191,15 @@ function checkGameOver(ctx, board) {        // Checks for game over and doles ou
         }
 
         ctx.fillText(gameOverText, width / 3 - 100, height / 2);
+        ctx.font = "20px sans-serif";
+        ctx.fillText("Click again for a new game.", width / 3 - 90, height / 2 + 30);
         gameOver = true;
     }
     else if(boardFull(board)) {                    // Either someone won or the board filled up and it's a tie game
         alert("It's a tie game.");
-        ctx.fillText("Game Tied", width / 3 - 100, height / 2);
+        ctx.fillText("Tie Game", width / 3 - 100, height / 2);
+        ctx.font = "20px sans-serif";
+        ctx.fillText("Click again for a new game.", width / 3 - 95, height / 2 + 30);
         gameOver = true;
     }
 
@@ -198,6 +210,7 @@ function draw() {           // This is the main function, which calls all the ot
     var canvas;
     var ctx;
     var board;
+    if($.browser.mozilla) alert("Disclaimer: Connect Four does not work in Mozilla Firefox. Please use Chrome or Safari to play.");
 
     initializeGame();
     board = initializeBoard();
@@ -208,7 +221,9 @@ function draw() {           // This is the main function, which calls all the ot
     canvas.onmousemove = mouseMove;
     
     ctx = canvas.getContext("2d");
+    clearBoard(ctx);
     renderBoard(ctx, board);
+    intro(ctx);
     canvas.onmouseup =                      // This is critical. The board is updated and re-rendered everytime the mouse is released.
     function(e) {                           // The Player moves first and the Bot moves immediately afterwards.
         if(!gameOver){                      

@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bonus</title>
+        <title>Bonus #1</title>
         <link type="text/css" rel="stylesheet" href="connect_four.css" />
         <script type="text/javascript" src="connect_four.js"></script>
         <script type="text/javascript" src="bot_AI.js"></script>
-        <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="../jquery/jquery-1.7.2.min.js"></script>
     </head>
 
     <body onload="draw();">
         <div id="wrap">
             <div id="intro">
-                <p><h1>Bonus: Programmatically create a game of Connect 4 with one
+                <p><h1>Bonus #1: Programmatically create a game of Connect 4 with one
                 AI-controlled opponent and a human-controlled player.</h1>
                 This is a game of Connect 4 made using the HTML Canvas element
-                and Javascript. Click one of the columns to drop in a piece.
+                and Javascript. Click on one of the columns to drop in a piece.
                 The human-controlled player is always the first to move. The
-                AI-controlled opponent heuristically determines
-                its next move based on where the human-controlled player's
-                pieces are, and tends to be more defensive. It's
-                not impossible to beat, but does requires the player to pay a
-                fair amount of attention. The wins are recursively checked for.</p>
+                AI-controlled opponent's moves are heuristically determined.
+                Its first priority is to win and its second priority is to block
+                human-controlled player wins. Otherwise, it moves depending on how
+                many human-controlled player pieces surrond a particular spot. It
+                avoids moves that give the player a chance to win
+                and also avoids moves that give the player a chance to block. It's
+                not impossible to beat, but it does require the player to pay attention.
+                The wins are recursively determined. The scoreboard below the game board
+                uses jQuery.</p>
             <div>
             <canvas id="canvas"></canvas>
             

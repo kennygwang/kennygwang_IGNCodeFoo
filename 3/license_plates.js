@@ -4,7 +4,7 @@ var calcPlates = function() {
     document.getElementById("input").select();
     
     var population = Number(document.getElementById("input").value);       // get the population value from the text field
-    if(!$.isNumeric(population) || population === 0) {              // verify that the user input a positive numeric value for population. also, why doesn't === work?
+    if(!$.isNumeric(population) || population === 0) {              // verify that the user input a positive numeric value for population.
         alert("Your population must be a positive number. Nice try, though.")
         return;
     }

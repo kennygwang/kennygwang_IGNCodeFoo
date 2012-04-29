@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+    font-family: "arial";
+    
+    background: #111111; /* Old browsers */
+    background: -moz-linear-gradient(top, #111111 6%, #383838 98%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(6%,#111111), color-stop(98%,#383838)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #111111 6%,#383838 98%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #111111 6%,#383838 98%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #111111 6%,#383838 98%); /* IE10+ */
+    background: linear-gradient(top, #111111 6%,#383838 98%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111111', endColorstr='#383838',GradientType=0 ); /* IE6-9 */
+}
+
+#wrap {
+    margin: 0px auto;
+    width: 960px;
+}
+
+#intro {
+    margin: 0px auto;
+    width: 960px;
+    padding-top: 10px;
+    color: white;
+}
+
+#nav{
+    margin: 0px auto;
+    width: 960px;
+    padding-top:20px;
+    padding-bottom: 125px;
+}
+
+#prev {float: left;}
+a{color: lime; text-decoration: none;}
+a:hover {text-decoration: underline;}
