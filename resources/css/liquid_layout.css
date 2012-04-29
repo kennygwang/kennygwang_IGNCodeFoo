@@ -37,14 +37,11 @@ html, body {
 
 #page-wrapper {
     /*border: 1px solid black;*/
-    background: #111111; /* Old browsers */
-    background: -moz-linear-gradient(top, #111111 6%, #383838 98%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(6%,#111111), color-stop(98%,#383838)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #111111 6%,#383838 98%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #111111 6%,#383838 98%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #111111 6%,#383838 98%); /* IE10+ */
-    background: linear-gradient(top, #111111 6%,#383838 98%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111111', endColorstr='#383838',GradientType=0 ); /* IE6-9 */
+    
+    background: #111111;
+    background-image: url('../vid_img/portal_left.png'), url('../vid_img/portal_right.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: right, left;
     
     width: 100%;
     height: 100%;
@@ -128,9 +125,12 @@ html, body {
     max-width: 960px;
     min-width: 780px;
     margin: 0px auto;
+    padding-top: 12px;
 }
+#nav p{display: inline;}
 
 #prev {float: left;}
 #next {float: right;}
-a {text-decoration: none;}
+a, a:visited, a:link {text-decoration: none; color: black;}
 a:hover {text-decoration: underline;}
+

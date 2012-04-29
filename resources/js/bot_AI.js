@@ -48,7 +48,7 @@ function heurDownRight(board, row, col, piece) {
 }
 
 function heurValue(board, row, col, piece){
-    hDown = heurDown(board, row, col, piece) + 1;                               // +1 compensates for the lack of double-counting the dropped piece
+    hDown = heurDown(board, row, col, piece) + 1;        // +1 compensates for the lack of double-counting the dropped piece
     hHori = heurLeft(board, row, col, piece) + heurRight(board, row, col, piece);
     hDia1 = heurUpLeft(board, row, col, piece) + heurDownRight(board, row, col, piece);
     hDia2 = heurDownLeft(board, row, col, piece) + heurUpRight(board, row, col, piece);
@@ -57,10 +57,10 @@ function heurValue(board, row, col, piece){
 }
 // *********************************************************************************************************************
 
-function heuristicMove(board){                           // This is the function that ultimately moves the Bot's pieces
+function heuristicMove(board){                          // This is the function that ultimately moves the Bot's pieces
     var lastRow = 0;
     var hArray = [board[0].length];    
-    for(x=0; x < hArray.length; x++){hArray[x] = 0;}     // Initialize the heuristicArray
+    for(x=0; x < hArray.length; x++){hArray[x] = 0;}    // Initialize the heuristicArray
         
     for(i=0; i < numCols; i++){
         lastRow = numRows - 1;
@@ -91,7 +91,7 @@ function heuristicMove(board){                           // This is the function
         
     board[lastRow][botMoveCol] = Piece.PlayerTwo;         // Finally, bot "drops" a piece
         
-    turn = Piece.PlayerOne;                               // These three must be updated everytime a piece is dropped
+    turn = Piece.PlayerOne;      // These three must be updated everytime a piece is dropped
     lastPieceRow = lastRow;
     lastPieceCol = botMoveCol;
 }

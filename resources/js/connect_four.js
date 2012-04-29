@@ -1,3 +1,4 @@
+// Start declaring some important global variables
 var numRows = 6;                        // 6 rows x 7 columns Connect Four Board
 var numCols = 7;
 var blockWidth = 65;                    // Each block, or "space" on the board will be 65px squares on the canvas element
@@ -15,6 +16,8 @@ var lastPieceRow = 0;                   // Two important variables that keep tra
 var lastPieceCol = 0;
 var playerWins = 0;                     // Two global variables that track scores
 var botWins = 0;
+
+// **********************************************************************************************
 
 function initializeGame() {             // Important values are initialized
     turn = Piece.PlayerOne;
@@ -110,7 +113,8 @@ function dropPiece(board) {                     // Important function that deter
     playerMovedYet = true;
 }
 
-function checkDown(board, row, col) {            // recursive functions to check for consecutive pieces in the eight zones surrounding a particular piece
+// Below are recursive functions to check for consecutive pieces in the eight zones surrounding a particular piece
+function checkDown(board, row, col) {
     if(row+1 >= numRows || board[row][col] != board[row+1][col]) return 1;
     return 1 + checkDown(board, row+1, col);
 }
@@ -138,8 +142,10 @@ function checkDownRight(board, row, col) {
     if(row+1 >= numRows || col+1 >= numCols || board[row][col] != board[row+1][col+1]) return 1;
     return 1 + checkDownRight(board, row+1, col+1);
 }
+//**********************************************************************************************
 
-function checkVerticalWin(board) {                                      // These 3 functions utilize the above recursive funtions to check for 3 types of wins
+// The 3 functions below use the above recursive funtions to check for 3 types of wins
+function checkVerticalWin(board) {
     if(checkDown(board, lastPieceRow, lastPieceCol) >= 4) return true;
     return false;
 }
@@ -152,6 +158,7 @@ function checkDiagonalWin(board) {
     if(checkUpRight(board, lastPieceRow, lastPieceCol) + checkDownLeft(board, lastPieceRow, lastPieceCol) >= 5) return true;
     return false;
 }
+//**********************************************************************************************
 
 function isGameOver(board) {                // If any of the 3 types of wins occured, the game is over
     return checkVerticalWin(board) ||
@@ -205,8 +212,10 @@ function checkGameOver(ctx, board) {        // Checks for game over and doles ou
 
     ctx.restore();
 }
+//**********************************************************************************************
 
-function draw() {           // This is the main function, which calls all the others
+// Below is the main function, which calls all the others
+function draw() {
     var canvas;
     var ctx;
     var board;
