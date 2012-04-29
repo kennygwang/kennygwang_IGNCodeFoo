@@ -17,7 +17,7 @@ function maxArrValIndex(array){
     return maxIndex;
 }
 
-// Below are the recursive functions used to assign heuristic values to each possibel move
+// Below are the recursive functions used to assign heuristic values to each possible move
 function heurDown(board, row, col, piece) {                                                  
     if(row+1 >= numRows || board[row+1][col] != piece) return 1;
     return 1 + heurDown(board, row+1, col, piece);
